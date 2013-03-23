@@ -18,16 +18,16 @@
 		    android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="Identify shapes"
-	        android:onClick="identify" />
+	        android:onClick="identifyShape" />
 		<Button
 		    android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="Identify colors"
-	        android:onClick="identify" />
+	        android:onClick="identifyColor" />
 		<Button
 		    android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="Identify body parts"
-	        android:onClick="identify" />
+	        android:onClick="identifyBody" />
     </LinearLayout>
 </RelativeLayout>

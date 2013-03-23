@@ -21,8 +21,21 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    public void identify(View view) {
-    	new AlertDialog.Builder(this).setMessage("Identify!").show();
-    	startActivity(new Intent(this, IdentifyActivity.class));
+    public void identifyShape(View view) {
+    	identify(0);
+    }
+    
+    public void identifyColor(View view) {
+    	identify(1);
+    }
+    
+    public void identifyBody(View view) {
+    	identify(2);
+    }
+    
+    public void identify(int index) {
+    	Intent intent = new Intent(this, IdentifyActivity.class);
+    	intent.putExtra("currentQuestionCategory", index);
+    	startActivity(intent);
     }
 }
