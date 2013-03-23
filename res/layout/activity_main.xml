@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal"
-                android:onClick="identifyShapes"
+                android:onClick="identifyShape"
                 
                 android:text="Identify shapes" />
 
@@ -89,6 +89,7 @@
                 android:layout_gravity="center"
                 android:text="5 shapes" />
         </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
