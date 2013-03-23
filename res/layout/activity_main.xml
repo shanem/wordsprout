@@ -2,32 +2,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+
     <LinearLayout
-       	android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:orientation="vertical"
-        android:gravity="center">
-	    <TextView
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_centerHorizontal="true"
-	        android:layout_centerVertical="true"
-	        android:text="Learning modes"
-	        tools:context=".MainActivity" />
-		<Button
-		    android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Identify shapes"
-	        android:onClick="identify" />
-		<Button
-		    android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Identify colors"
-	        android:onClick="identify" />
-		<Button
-		    android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Identify body parts"
-	        android:onClick="identify" />
+        android:weightSum="11" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+                        android:orientation="vertical"
+            android:layout_weight="2" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Learning modes"
+                tools:context=".MainActivity" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+                        android:orientation="vertical"
+            
+            android:layout_weight="3" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_horizontal"
+                android:onClick="identifyShapes"
+                android:text="Identify shapes" />
+            <TextView
+                android:id="@+id/shapeCompletionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="5 shapes"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:orientation="vertical"
+            android:layout_weight="3" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="identifyColor"
+                android:text="Identify colors" />
+             <TextView
+                android:id="@id/colorCompletionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="5 shapes"/>
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:orientation="vertical"
+            android:layout_weight="3" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:onClick="identifyBody"
+                android:text="Identify body parts" />
+             <TextView
+                android:id="@id/bodyCompletionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="5 shapes"/>
+            
+        </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>
