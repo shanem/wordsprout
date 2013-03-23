@@ -12,22 +12,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_centerHorizontal="true"
 	        android:layout_centerVertical="true"
-	        android:text="Learning modes"
+	        android:text="Here's where we identify stuff!"
 	        tools:context=".MainActivity" />
-		<Button
-		    android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Identify shapes"
-	        android:onClick="identify" />
-		<Button
-		    android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Identify colors"
-	        android:onClick="identify" />
-		<Button
-		    android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Identify body parts"
-	        android:onClick="identify" />
     </LinearLayout>
 </RelativeLayout>
