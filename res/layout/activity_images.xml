@@ -5,32 +5,67 @@
     android:background="@drawable/bg3"
     android:id="@+id/rView"
      >
-
-    <Button
+    <ImageView
+        android:id="@+id/img02"
+        android:layout_width="350dip"
+        android:layout_height="500dip"
+        android:layout_above="@+id/sharedBtn"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="-50dip"
+        android:src="@drawable/ic_launcher" />
+    <ImageView
+        android:id="@+id/img01"
+        android:layout_width="300dip"
+        android:layout_height="450dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_launcher" />
+    <ImageView
         android:id="@+id/sharedBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Share It" />
-
-        <ImageView
-            android:id="@+id/img01"
-            android:layout_width="300dip"
-            android:layout_height="450dip"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="105dp"
-            android:src="@drawable/ic_launcher" />
-
-        <ImageView
-            android:id="@+id/img02"
-            android:layout_width="350dip"
-            android:layout_height="500dip"
-            android:layout_above="@+id/sharedBtn"
-            android:layout_marginBottom="26dp"
-            android:layout_toLeftOf="@+id/sharedBtn"
-            android:rotation="-30"
-            android:src="@drawable/ic_launcher" />
-    
+        android:src="@drawable/final_button_share"
+        android:layout_margin="5dip" />
+    <ImageView
+        android:id="@+id/restartBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/final_button_restart"
+        android:layout_margin="5dip" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:layout_marginRight="10dip"
+        >
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="36dip"
+	        android:textColor="#ffffff"
+	        android:textStyle="bold"
+	        android:text="Jan"/>
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="48dip"
+	        android:textColor="#ffffff"
+	        android:textStyle="bold"
+	        android:layout_marginTop="-20dip"
+	        android:text="13"/>
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="30dip"
+	        android:textColor="#ffffff"
+	        android:textStyle="bold"
+	        android:layout_marginTop="-20dip"
+	        android:text="2013"/>
+    </LinearLayout>
 </RelativeLayout>
