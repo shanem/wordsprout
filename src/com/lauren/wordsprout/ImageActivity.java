@@ -65,7 +65,7 @@ public class ImageActivity extends Activity {
 				Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
 				
 				//Re-show buttons
-				sharedBtn.setVisibility(View.INVISIBLE);
+				sharedBtn.setVisibility(View.VISIBLE);
 				restartBtn.setVisibility(View.VISIBLE);
 				
 				//Share
