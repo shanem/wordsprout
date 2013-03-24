@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg3"
      >
-
-
     <ImageView
         android:id="@+id/img02"
         android:layout_width="350dip"
@@ -37,5 +35,36 @@
         android:layout_alignParentLeft="true"
         android:src="@drawable/final_button_restart"
         android:layout_margin="5dip" />
-    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:layout_marginRight="10dip"
+        >
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="36dip"
+	        android:textColor="#ffffff"
+	        android:textStyle="bold"
+	        android:text="Jan"/>
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="48dip"
+	        android:textColor="#ffffff"
+	        android:textStyle="bold"
+	        android:layout_marginTop="-20dip"
+	        android:text="13"/>
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="30dip"
+	        android:textColor="#ffffff"
+	        android:textStyle="bold"
+	        android:layout_marginTop="-20dip"
+	        android:text="2013"/>
+    </LinearLayout>
 </RelativeLayout>
