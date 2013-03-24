@@ -49,14 +49,14 @@ public class MainActivity extends Activity {
     
     public void identify(int index) {
     	//Clear images before starting flow.
-//    	for (int i = 0; i < QuestionSets.shapeQuestions.length; i++) {
-//    		String path = Environment.getExternalStorageDirectory().toString();
-//            path += "/WordSprout-image-" + index + "_" + i + ".jpg";
-//            File f = new File(path);
-//            if (f.exists()) {
-//            	f.delete();
-//            }
-//    	}
+    	for (int i = 0; i < QuestionSets.shapeQuestions.length; i++) {
+    		String path = Environment.getExternalStorageDirectory().toString();
+            path += "/WordSprout-image-" + index + "_" + i + ".jpg";
+            File f = new File(path);
+            if (f.exists()) {
+            	f.delete();
+            }
+    	}
     	
     	Intent intent = new Intent(this, IdentifyActivity.class);
     	intent.putExtra("currentQuestionCategory", index);
