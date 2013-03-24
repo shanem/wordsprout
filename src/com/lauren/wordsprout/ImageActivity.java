@@ -50,18 +50,26 @@ public class ImageActivity extends Activity {
 		sharedBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				View view =  findViewById(android.R.id.content).getRootView();
+				//Hide buttons
+				sharedBtn.setVisibility(View.INVISIBLE);
+				restartBtn.setVisibility(View.INVISIBLE);
+				
+				//Take photo
+				View view =  findViewById(R.id.rView);
 				view.setDrawingCacheEnabled(true);
 				BitmapFactory.Options options = new BitmapFactory.Options();
 	            options.inSampleSize = 4;
 				Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+				
+				//Re-show buttons
+				sharedBtn.setVisibility(View.INVISIBLE);
+				restartBtn.setVisibility(View.VISIBLE);
+				
+				//Share
 				String path = Images.Media.insertImage(getContentResolver(), bitmap, "Image to Share", null);
 				Uri sharedUri = Uri.parse(path);
 
 				Intent sharedIntent = new Intent(Intent.ACTION_SEND);
-				//sharedIntent.setType("text/html");
-				//sharedIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<p>This is the text that will be shared.</p>"));
 				
 				sharedIntent.setType("image/png");
 				sharedIntent.putExtra(Intent.EXTRA_STREAM, sharedUri);
