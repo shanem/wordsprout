@@ -8,13 +8,13 @@ import com.lauren.wordsprout.IdentifyActivity;
 
 public class QuestionSets {
 	public static String[] shapeQuestions = {
-		"A square",
-		"A circle"
+		"What food can you find?",
+		"What's a good snack?"
 	};
 	
 	public static String[] shapeFollowup = {
-		"Count the edges!",
-		"How is it used?"
+		"Where does it come from?",
+		"Why do you like it?"
 	};
 	
 	public static String[] colorQuestions = {
@@ -29,7 +29,7 @@ public class QuestionSets {
 	
 	public static String[] bodyQuestions = {
 		"Have your child find their nose!",
-		"Have your child find their knee !"
+		"Have your child find their knee!"
 	};
 	
 	public static String[] bodyFollowup = {

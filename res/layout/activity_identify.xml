@@ -6,7 +6,7 @@
     <RelativeLayout
         android:id="@+id/header_bar"
        	android:layout_width="fill_parent"
-        android:layout_height="76dip"
+        android:layout_height="96dip"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_alignParentTop="true">
@@ -49,16 +49,16 @@
 	        android:layout_height="wrap_content"
 	        android:layout_centerHorizontal="true"
 	        android:textColor="#ffffff"
-	        android:textSize="30dip"
+	        android:textSize="24dip"
 	        android:text="Here's where we identify stuff!"
 	        tools:context=".MainActivity"
 	        android:shadowColor="#80000000"
 	        android:shadowDy="-2"
 	        android:shadowRadius="2"
-	        android:lines="1"
-	        android:ellipsize="end"
+	        android:gravity="center"
+	        android:lines="2"
 	        android:layout_alignParentBottom="true"
-	        android:layout_marginBottom="10dip"
+	        android:layout_marginBottom="15dip"
 	        android:layout_marginRight="45dip"
 	        android:layout_marginLeft="45dip" />
     </RelativeLayout>
@@ -76,7 +76,7 @@
         android:layout_height="43dip"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="14dip"
+        android:layout_marginTop="24dip"
         android:layout_marginRight="4dip"
         android:background="@drawable/quiz_button_next"
         android:onClick="next" />
