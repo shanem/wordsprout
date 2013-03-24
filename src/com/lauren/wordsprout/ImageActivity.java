@@ -9,13 +9,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore.Images;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class ImageActivity extends Activity {
@@ -38,6 +41,7 @@ public class ImageActivity extends Activity {
 		imageViews = new ArrayList<ImageView>();
 		imageViews.add((ImageView) findViewById(R.id.img01));
 		imageViews.add((ImageView) findViewById(R.id.img02));
+	
 		sharedBtn = (ImageView) findViewById(R.id.sharedBtn);
 		restartBtn = (ImageView) findViewById(R.id.restartBtn);
 		monthLabel = (TextView) findViewById(R.id.month_label);
@@ -46,7 +50,21 @@ public class ImageActivity extends Activity {
 		sharedBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				View view =  findViewById(android.R.id.content).getRootView();
+				view.setDrawingCacheEnabled(true);
+				BitmapFactory.Options options = new BitmapFactory.Options();
+	            options.inSampleSize = 4;
+				Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+				String path = Images.Media.insertImage(getContentResolver(), bitmap, "Image to Share", null);
+				Uri sharedUri = Uri.parse(path);
+
 				Intent sharedIntent = new Intent(Intent.ACTION_SEND);
+				//sharedIntent.setType("text/html");
+				//sharedIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml("<p>This is the text that will be shared.</p>"));
+				
+				sharedIntent.setType("image/png");
+				sharedIntent.putExtra(Intent.EXTRA_STREAM, sharedUri);
 				startActivity(Intent.createChooser(sharedIntent, "Share the pictures using..."));
 			}
 		});
@@ -83,6 +101,7 @@ public class ImageActivity extends Activity {
     	    ImageView iv = imageViews.get(index);
     	    
     	    iv.setImageBitmap(bitmap);
+
     	   
     	    iv.setVisibility(View.VISIBLE);
     	}
