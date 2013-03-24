@@ -13,8 +13,8 @@ public class QuestionSets {
 	};
 	
 	public static String[] shapeFollowup = {
-		"Let's count the edges!",
-		"How do you use that?"
+		"Count the edges!",
+		"How is it used?"
 	};
 	
 	public static String[] colorQuestions = {
