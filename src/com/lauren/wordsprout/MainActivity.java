@@ -1,9 +1,11 @@
 package com.lauren.wordsprout;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 
@@ -19,6 +21,11 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
+    }
+    
+    @Override
+    public void onResume() {
+    	super.onResume();
     }
     
     public void identifyShape(View view) {
