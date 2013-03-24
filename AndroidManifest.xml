@@ -28,7 +28,11 @@
             android:name=".ImageActivity"
             android:label="Answer Images" >
         </activity>
-        
+        <intent-filter>
+   <action android:name="android.intent.action.SEND" />
+   <category android:name="android.intent.category.DEFAULT" />
+   <data android:mimeType="image/*" />
+</intent-filter>
     </application>
 	<uses-permission
 		android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

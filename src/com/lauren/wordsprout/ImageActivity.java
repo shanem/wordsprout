@@ -5,17 +5,19 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class ImageActivity extends Activity {
 	ArrayList<ImageView> imageViews;
 	static int cId; 
+	Button sharedBtn;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -24,6 +26,16 @@ public class ImageActivity extends Activity {
 		imageViews = new ArrayList<ImageView>();
 		imageViews.add((ImageView) findViewById(R.id.img01));
 		imageViews.add((ImageView) findViewById(R.id.img02));
+		sharedBtn = (Button) findViewById(R.id.sharedBtn);
+		sharedBtn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent sharedIntent = new Intent(Intent.ACTION_SEND);
+				startActivity(Intent.createChooser(sharedIntent, "Share the pictures using..."));
+			}
+		});
         cId = this.getIntent().getExtras().getInt("cID");
         for(int i = 0; i < 2; i++)
         	setupImages(i);
@@ -33,7 +45,7 @@ public class ImageActivity extends Activity {
 		File imageFile = new File(getCurrentImagePath(index));
 	   	if (imageFile.exists()){
     		BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 2;
+            options.inSampleSize = 4;
     	    Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
     	    //Matrix mat = new Matrix();
     	    
@@ -43,14 +55,12 @@ public class ImageActivity extends Activity {
     	    //		, iv.getDrawable().getBounds().height()/2);
     	    
     	    iv.setImageBitmap(bitmap);
-    	   iv.setPivotX(iv.getWidth());
+    	   iv.setPivotX(iv.getWidth()/2);
     	   // iv.setPivotX(0);
     	   // iv.setPivotY(0);
-    	   // iv.setPivotY(iv.getHeight()/2);
+    	    iv.setPivotY(iv.getHeight()/2);
     	  
-    	   
-    	   
-    	   //iv.setRotation(90);
+    	   iv.setRotation(20+index*10);
     	   
     	   
     	   

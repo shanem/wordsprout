@@ -35,8 +35,8 @@ import com.lauren.wordsprout.data.QuestionSets;
 
 public class IdentifyActivity extends Activity {
 
-	private static int currentQuestionCategory;
-	private static int currentQuestionIndex;
+	private static int currentQuestionCategory=0;
+	private static int currentQuestionIndex=0;
 	
 	private String[] questions;
 	
@@ -55,7 +55,6 @@ public class IdentifyActivity extends Activity {
         imageView = (ImageView) findViewById(R.id.answer_photo);
 
         
-        currentQuestionIndex = 0;
         currentQuestionCategory = this.getIntent().getExtras().getInt("currentQuestionCategory");
         switch (currentQuestionCategory) {
         	case 0:

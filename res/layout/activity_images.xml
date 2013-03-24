@@ -5,22 +5,31 @@
     android:background="@drawable/bg3"
      >
 
-    <ImageView
-        android:id="@+id/img01"
-        android:layout_width="200dip"
-        android:layout_height="250dip"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="38dp"
-        android:src="@drawable/ic_launcher" />
-
-    <ImageView
-        android:id="@+id/img02"
-        android:layout_width="250dip"
-        android:layout_height="300dip"
+    <Button
+        android:id="@+id/sharedBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="46dp"
-        android:src="@drawable/ic_launcher" />
+        android:layout_alignParentRight="true"
+        android:text="Share It" />
+
+        <ImageView
+            android:id="@+id/img01"
+            android:layout_width="300dip"
+            android:layout_height="450dip"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="105dp"
+            android:src="@drawable/ic_launcher" />
+
+        <ImageView
+            android:id="@+id/img02"
+            android:layout_width="350dip"
+            android:layout_height="500dip"
+            android:layout_above="@+id/sharedBtn"
+            android:layout_marginBottom="26dp"
+            android:layout_toLeftOf="@+id/sharedBtn"
+            android:rotation="-30"
+            android:src="@drawable/ic_launcher" />
     
 </RelativeLayout>
