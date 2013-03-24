@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
+import android.view.Window;
 import android.widget.ImageView;
 
 public class ImageActivity extends Activity {
@@ -22,6 +23,7 @@ public class ImageActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_images);
 		imageViews = new ArrayList<ImageView>();
 		imageViews.add((ImageView) findViewById(R.id.img01));

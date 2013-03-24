@@ -16,6 +16,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,6 +30,8 @@ import android.provider.MediaStore.Images.Media;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,13 +39,17 @@ import com.lauren.wordsprout.data.QuestionSets;
 
 public class IdentifyActivity extends Activity {
 
-	private static int currentQuestionCategory=0;
-	private static int currentQuestionIndex=0;
+	private int currentQuestionCategory = 0;
+	private int currentQuestionIndex = 0;
 	
 	private String[] questions;
+	private String[] followups;
 	
 	private TextView questionView;
+	private TextView questionPrompt;
 	private ImageView imageView;
+	private Button retakeButton;
+	private Button nextButton;
 	private Uri photoUri;
 	
 	private final int FROM_CAMERA = 1;
@@ -50,21 +58,27 @@ public class IdentifyActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         restoreInstanceState(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_identify);
         questionView = (TextView) findViewById(R.id.question_text);
         imageView = (ImageView) findViewById(R.id.answer_photo);
-
+        retakeButton = (Button) findViewById(R.id.retake_button);
+        nextButton = (Button) findViewById(R.id.next_button);
+        questionPrompt = (TextView) findViewById(R.id.question_prompt);
         
         currentQuestionCategory = this.getIntent().getExtras().getInt("currentQuestionCategory");
         switch (currentQuestionCategory) {
         	case 0:
         		questions = QuestionSets.shapeQuestions;
+        		followups = QuestionSets.shapeFollowup;
         		break;
         	case 1:
         		questions = QuestionSets.colorQuestions;
+        		followups = QuestionSets.colorFollowup;
         		break;
         	case 2:
         		questions = QuestionSets.bodyQuestions;
+        		followups = QuestionSets.bodyFollowup;
         		break;
         }
     }
@@ -73,6 +87,7 @@ public class IdentifyActivity extends Activity {
     public void onResume() {
     	super.onResume();
     	questionView.setText(questions[currentQuestionIndex]);
+    	questionPrompt.setVisibility(View.VISIBLE);
     	trySetPhoto();
     }
     
@@ -80,6 +95,7 @@ public class IdentifyActivity extends Activity {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         if (photoUri != null)
             savedInstanceState.putString("photoUri", photoUri.toString());
+        savedInstanceState.putInt("currentQuestionIndex", currentQuestionIndex);
     }
     
     protected void restoreInstanceState(Bundle instanceState) {
@@ -87,6 +103,7 @@ public class IdentifyActivity extends Activity {
             return;
         if (instanceState.getString("photoUri") != null)
         	photoUri = Uri.parse(instanceState.getString("photoUri"));
+        currentQuestionIndex = instanceState.getInt("currentQuestionIndex", 0);
     }
 
     @Override
@@ -96,18 +113,25 @@ public class IdentifyActivity extends Activity {
     }
     
     public void next(View view) {
+    	Log.d("HI", "NEXT!!!!!!!!!!!!");
     	if (currentQuestionIndex < questions.length - 1) {
     		currentQuestionIndex++;
     	}
     	else {
     		Intent img = new Intent(this, ImageActivity.class);
         	img.putExtra("cID", currentQuestionCategory);
-
     		startActivity(img);
-    		//currentQuestionIndex = 0;
+    		return;
     	}
     	questionView.setText(questions[currentQuestionIndex]);
     	trySetPhoto();
+    }
+    
+    public void tryTakePhoto(View view) {
+    	File file = new File(getCurrentImagePath());
+    	if(!file.exists()) {
+    		takePhoto(view);
+    	}
     }
     
     public void takePhoto(View view) {
@@ -206,17 +230,60 @@ public class IdentifyActivity extends Activity {
     		BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 2;
     	    Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
+    	    bitmap = rotateImage(bitmap, 90);
     	    imageView.setImageBitmap(bitmap);
-    	    imageView.setVisibility(View.VISIBLE);
+    	    retakeButton.setVisibility(View.VISIBLE);
+    	    nextButton.setVisibility(View.VISIBLE);
+    	    questionView.setText(followups[currentQuestionIndex]);
+    	    questionPrompt.setText("Now...");
     	}
     	else {
-    		imageView.setVisibility(View.INVISIBLE);
+    		imageView.setImageDrawable(getResources().getDrawable(R.drawable.camera_button_camera));
+    		retakeButton.setVisibility(View.GONE);
+    		nextButton.setVisibility(View.GONE);
+    		questionPrompt.setText("I spy");
     	}
     }
     
-    public static String getCurrentImagePath() {
+    private String getCurrentImagePath() {
     	String path = Environment.getExternalStorageDirectory().toString();
         path += "/WordSprout-image-" + currentQuestionCategory + "_" + currentQuestionIndex + ".jpg";
         return path;
+    }
+    
+    private Bitmap rotateImage(Bitmap originalImage, int rotation) {
+    	Matrix matrix = new Matrix();
+    	matrix.postRotate(rotation);
+    	return Bitmap.createBitmap(originalImage, 0, 0, 
+    			originalImage.getWidth(), originalImage.getHeight(), 
+    	                              matrix, true);
+    }
+    
+    private int getCameraPhotoOrientation(Context context, Uri imageUri, String imagePath){
+        int rotate = 0;
+        try {
+            context.getContentResolver().notifyChange(imageUri, null);
+            File imageFile = new File(imagePath);
+            ExifInterface exif = new ExifInterface(
+                    imageFile.getAbsolutePath());
+            int orientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+
+            switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                rotate = 270;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                rotate = 180;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                rotate = 90;
+                break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rotate;
     }
 }
