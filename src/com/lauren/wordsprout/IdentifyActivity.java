@@ -28,6 +28,8 @@ import android.provider.MediaStore.Images.Media;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +44,8 @@ public class IdentifyActivity extends Activity {
 	
 	private TextView questionView;
 	private ImageView imageView;
+	private Button retakeButton;
+	private ImageView nextButton;
 	private Uri photoUri;
 	
 	private final int FROM_CAMERA = 1;
@@ -50,10 +54,11 @@ public class IdentifyActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         restoreInstanceState(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_identify);
         questionView = (TextView) findViewById(R.id.question_text);
         imageView = (ImageView) findViewById(R.id.answer_photo);
-
+        retakeButton = (Button) findViewById(R.id.retake_button);
         
         currentQuestionIndex = 0;
         currentQuestionCategory = this.getIntent().getExtras().getInt("currentQuestionCategory");
@@ -97,6 +102,7 @@ public class IdentifyActivity extends Activity {
     }
     
     public void next(View view) {
+    	Log.d("HI", "NEXT!!!!!!!!!!!!");
     	if (currentQuestionIndex < questions.length - 1) {
     		currentQuestionIndex++;
     	}
@@ -105,6 +111,13 @@ public class IdentifyActivity extends Activity {
     	}
     	questionView.setText(questions[currentQuestionIndex]);
     	trySetPhoto();
+    }
+    
+    public void tryTakePhoto(View view) {
+    	File file = new File(getCurrentImagePath());
+    	if(!file.exists()) {
+    		takePhoto(view);
+    	}
     }
     
     public void takePhoto(View view) {
@@ -205,9 +218,11 @@ public class IdentifyActivity extends Activity {
     	    Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
     	    imageView.setImageBitmap(bitmap);
     	    imageView.setVisibility(View.VISIBLE);
+    	    retakeButton.setVisibility(View.VISIBLE);
     	}
     	else {
-    		imageView.setVisibility(View.INVISIBLE);
+    		imageView.setImageDrawable(getResources().getDrawable(R.drawable.camera_button_camera));
+    		retakeButton.setVisibility(View.GONE);
     	}
     }
     

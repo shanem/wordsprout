@@ -1,43 +1,75 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <LinearLayout
-       	android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/camera_background_dark" >
+    <RelativeLayout
+        android:id="@+id/header_bar"
+       	android:layout_width="fill_parent"
+        android:layout_height="52dip"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_alignParentTop="true">
+        <ImageView 
+            android:id="@+id/header_middle"
+            android:layout_width="0dip"
+            android:layout_height="0dip"
+            android:layout_centerHorizontal="true" />
+        <ImageView
+            android:id="@+id/header_left"
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+        	android:layout_toLeftOf="@id/header_middle"
+        	android:scaleType="fitXY"
+        	android:src="@drawable/camera_topbar_background_light"
+            />
+        <ImageView 
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+        	android:layout_toRightOf="@id/header_middle"
+        	android:scaleType="fitXY"
+        	android:src="@drawable/camera_topbar_background_dark"
+            />-
 	    <TextView
 	        android:id="@+id/question_text"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_centerHorizontal="true"
 	        android:layout_centerVertical="true"
+	        android:textColor="#ffffff"
+	        android:textSize="20dip"
 	        android:text="Here's where we identify stuff!"
-	        tools:context=".MainActivity" />
-	    <ImageView
-	        android:id="@+id/answer_photo"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content">
-	    </ImageView>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
+	        tools:context=".MainActivity"
+	        android:shadowColor="#80000000"
+	        android:shadowDy="-2"
+	        android:shadowRadius="2" />
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/answer_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:onClick="tryTakePhoto">
+    </ImageView>
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="0dip"
+        android:layout_marginRight="5dip"
+        android:background="@drawable/quiz_button_next"
+        android:onClick="next" />
+    <Button
+        android:id="@+id/retake_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-        <Button
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Next Question"
-	        android:onClick="next">
-        </Button>
-        <Button
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Take Picture"
-	        android:onClick="takePhoto">
-        </Button>
-    </LinearLayout>
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dip"
+        android:background="@drawable/quiz_button_retake"
+        android:onClick="takePhoto"
+        android:visibility="gone">
+       </Button>
 </RelativeLayout>
