@@ -11,6 +11,7 @@ import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 
 public class ImageActivity extends Activity {
@@ -20,6 +21,7 @@ public class ImageActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_images);
 		imageViews = new ArrayList<ImageView>();
 		imageViews.add((ImageView) findViewById(R.id.img01));
@@ -33,7 +35,7 @@ public class ImageActivity extends Activity {
 		File imageFile = new File(getCurrentImagePath(index));
 	   	if (imageFile.exists()){
     		BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 2;
+            options.inSampleSize = 4;
     	    Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
     	    //Matrix mat = new Matrix();
     	    

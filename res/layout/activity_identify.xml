@@ -29,26 +29,44 @@
         	android:layout_toRightOf="@id/header_middle"
         	android:scaleType="fitXY"
         	android:src="@drawable/camera_topbar_background_dark"
-            />-
+            />
+        <TextView 
+            android:id="@+id/question_prompt"
+            android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerHorizontal="true"
+	        android:textColor="#3c4651"
+	        android:shadowColor="#65000000"
+	        android:shadowDy="2"
+	        android:shadowRadius="2"
+	        android:text="I spy"
+            />
 	    <TextView
 	        android:id="@+id/question_text"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_centerHorizontal="true"
-	        android:layout_centerVertical="true"
 	        android:textColor="#ffffff"
 	        android:textSize="20dip"
 	        android:text="Here's where we identify stuff!"
 	        tools:context=".MainActivity"
 	        android:shadowColor="#80000000"
 	        android:shadowDy="-2"
-	        android:shadowRadius="2" />
+	        android:shadowRadius="2"
+	        android:lines="1"
+	        android:ellipsize="end"
+	        android:layout_alignParentBottom="true"
+	        android:layout_marginBottom="10dip"
+	        android:layout_marginRight="45dip"
+	        android:layout_marginLeft="45dip" />
     </RelativeLayout>
     <ImageView
         android:id="@+id/answer_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_margin="10dip"
         android:onClick="tryTakePhoto">
     </ImageView>
     <Button

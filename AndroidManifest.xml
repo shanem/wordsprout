@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +23,13 @@
         </activity>
         <activity
             android:name=".IdentifyActivity"
-            android:label="Identify" >
+            android:label="Identify"
+            android:screenOrientation="portrait" >
         </activity>
                 <activity
             android:name=".ImageActivity"
-            android:label="Answer Images" >
+            android:label="Answer Images"
+            android:screenOrientation="portrait" >
         </activity>
         
     </application>

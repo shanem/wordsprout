@@ -8,20 +8,32 @@ import com.lauren.wordsprout.IdentifyActivity;
 
 public class QuestionSets {
 	public static String[] shapeQuestions = {
-		"Have your child find a square!",
-		"Have your child find a circle!",
-		"Have your child find a triangle!"
+		"A square",
+		"A circle"
+	};
+	
+	public static String[] shapeFollowup = {
+		"Let's count the edges!",
+		"How do you use that?"
 	};
 	
 	public static String[] colorQuestions = {
 		"Have your child find something blue!",
-		"Have your child find something red!",
-		"Have your child find something green!"
+		"Have your child find something red!"
+	};
+	
+	public static String[] colorFollowup = {
+		"Tell me more about that",
+		"Tell me more about that"
 	};
 	
 	public static String[] bodyQuestions = {
 		"Have your child find their nose!",
-		"Have your child find their knee !",
-		"Have your child find their anterior torsal flexor!"
+		"Have your child find their knee !"
+	};
+	
+	public static String[] bodyFollowup = {
+		"Tell me more about that",
+		"Tell me more about that"
 	};
 }
