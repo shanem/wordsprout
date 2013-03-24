@@ -53,6 +53,7 @@ public class IdentifyActivity extends Activity {
 	private Uri photoUri;
 	
 	private final int FROM_CAMERA = 1;
+	private final int FROM_IMAGE_VIEW = 2;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,14 +114,13 @@ public class IdentifyActivity extends Activity {
     }
     
     public void next(View view) {
-    	Log.d("HI", "NEXT!!!!!!!!!!!!");
     	if (currentQuestionIndex < questions.length - 1) {
     		currentQuestionIndex++;
     	}
     	else {
     		Intent img = new Intent(this, ImageActivity.class);
         	img.putExtra("cID", currentQuestionCategory);
-    		startActivity(img);
+    		startActivityForResult(img, FROM_IMAGE_VIEW);
     		return;
     	}
     	questionView.setText(questions[currentQuestionIndex]);
@@ -165,6 +165,10 @@ public class IdentifyActivity extends Activity {
             	Log.d("IDENTIFY", "From camera: " + photoUri);
             	storeImage(getRealPathFromURI(this, photoUri), Environment.DIRECTORY_PICTURES, this);
             	trySetPhoto();
+            	break;
+            case FROM_IMAGE_VIEW:
+            	finish();
+            	break;
         }
     }
     
@@ -228,7 +232,7 @@ public class IdentifyActivity extends Activity {
     	File imageFile = new  File(getCurrentImagePath());
     	if (imageFile.exists()){
     		BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 2;
+            options.inSampleSize = 4;
     	    Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
     	    bitmap = rotateImage(bitmap, 90);
     	    imageView.setImageBitmap(bitmap);
@@ -257,33 +261,5 @@ public class IdentifyActivity extends Activity {
     	return Bitmap.createBitmap(originalImage, 0, 0, 
     			originalImage.getWidth(), originalImage.getHeight(), 
     	                              matrix, true);
-    }
-    
-    private int getCameraPhotoOrientation(Context context, Uri imageUri, String imagePath){
-        int rotate = 0;
-        try {
-            context.getContentResolver().notifyChange(imageUri, null);
-            File imageFile = new File(imagePath);
-            ExifInterface exif = new ExifInterface(
-                    imageFile.getAbsolutePath());
-            int orientation = exif.getAttributeInt(
-                    ExifInterface.TAG_ORIENTATION,
-                    ExifInterface.ORIENTATION_NORMAL);
-
-            switch (orientation) {
-            case ExifInterface.ORIENTATION_ROTATE_270:
-                rotate = 270;
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_180:
-                rotate = 180;
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_90:
-                rotate = 90;
-                break;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return rotate;
     }
 }

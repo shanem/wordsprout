@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -17,8 +18,9 @@ import android.widget.ImageView;
 
 public class ImageActivity extends Activity {
 	ArrayList<ImageView> imageViews;
-	static int cId; 
-	Button sharedBtn;
+	private int cId; 
+	ImageView sharedBtn;
+	ImageView restartBtn;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -28,14 +30,20 @@ public class ImageActivity extends Activity {
 		imageViews = new ArrayList<ImageView>();
 		imageViews.add((ImageView) findViewById(R.id.img01));
 		imageViews.add((ImageView) findViewById(R.id.img02));
-		sharedBtn = (Button) findViewById(R.id.sharedBtn);
+		sharedBtn = (ImageView) findViewById(R.id.sharedBtn);
+		restartBtn = (ImageView) findViewById(R.id.restartBtn);
 		sharedBtn.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent sharedIntent = new Intent(Intent.ACTION_SEND);
 				startActivity(Intent.createChooser(sharedIntent, "Share the pictures using..."));
+			}
+		});
+		restartBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setResult(Activity.RESULT_OK);
+				finish();
 			}
 		});
         cId = this.getIntent().getExtras().getInt("cID");
@@ -49,35 +57,30 @@ public class ImageActivity extends Activity {
     		BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 4;
     	    Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
-    	    //Matrix mat = new Matrix();
+    	    bitmap = rotateImage(bitmap, 80 + index * 20);
     	    
     	    ImageView iv = imageViews.get(index);
-    	//    iv.setScaleType(ScaleType.MATRIX);
-    	  //  mat.postRotate((float) (index+1)*15, iv.getDrawable().getBounds().width()/2
-    	    //		, iv.getDrawable().getBounds().height()/2);
     	    
     	    iv.setImageBitmap(bitmap);
-    	   iv.setPivotX(iv.getWidth()/2);
-    	   // iv.setPivotX(0);
-    	   // iv.setPivotY(0);
-    	    iv.setPivotY(iv.getHeight()/2);
-    	  
-    	   iv.setRotation(20+index*10);
     	   
-    	   
-    	   
-    	   // iv.setImageMatrix(mat);
     	    iv.setVisibility(View.VISIBLE);
-    
     	}
     	else {
     		imageViews.get(index).setVisibility(View.INVISIBLE);
     	}
 	}
 	
-	   public static String getCurrentImagePath(int index) {
+	   private String getCurrentImagePath(int index) {
 	    	String path = Environment.getExternalStorageDirectory().toString();
 	        path += "/WordSprout-image-" + cId + "_" + index + ".jpg";
 	        return path;
+	    }
+	   
+	    private Bitmap rotateImage(Bitmap originalImage, int rotation) {
+	    	Matrix matrix = new Matrix();
+	    	matrix.postRotate(rotation);
+	    	return Bitmap.createBitmap(originalImage, 0, 0, 
+	    			originalImage.getWidth(), originalImage.getHeight(), 
+	    	                              matrix, true);
 	    }
 }
