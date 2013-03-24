@@ -37,7 +37,7 @@
 	        android:layout_alignParentTop="true"
 	        android:layout_centerHorizontal="true"
 	        android:textColor="#3c4651"
-	        android:shadowColor="#65000000"
+	        android:shadowColor="#65ffffff"
 	        android:shadowDy="2"
 	        android:shadowRadius="2"
 	        android:text="I spy"
