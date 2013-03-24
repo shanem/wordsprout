@@ -9,8 +9,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore.Images;
@@ -18,7 +22,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 
 public class ImageActivity extends Activity {
@@ -106,9 +109,22 @@ public class ImageActivity extends Activity {
     	    Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
     	    bitmap = rotateImage(bitmap, 80 + index * 20);
     	    
+    	    BlurMaskFilter blurFilter = new BlurMaskFilter(5, BlurMaskFilter.Blur.OUTER);
+    	    Paint shadowPaint = new Paint();
+    	    shadowPaint.setMaskFilter(blurFilter);
+    	    shadowPaint.setShadowLayer(2f, 1f, 1f, Color.BLACK);
+
+    	    int[] offsetXY = new int[2];
+    	    Bitmap shadowImage = bitmap.extractAlpha(shadowPaint, offsetXY);
+    	    Bitmap shadowImage32 = shadowImage.copy(Bitmap.Config.ARGB_8888, true);
+
+
+    	    Canvas c = new Canvas(shadowImage32);
+    	    c.drawBitmap(bitmap, offsetXY[0], offsetXY[1], null);
+    	    
     	    ImageView iv = imageViews.get(index);
     	    
-    	    iv.setImageBitmap(bitmap);
+    	    iv.setImageBitmap(shadowImage32);
 
     	   
     	    iv.setVisibility(View.VISIBLE);
