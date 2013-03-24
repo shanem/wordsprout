@@ -72,12 +72,12 @@
     </ImageView>
     <Button
         android:id="@+id/next_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="59dip"
+        android:layout_height="43dip"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="13dip"
-        android:layout_marginRight="2dip"
+        android:layout_marginTop="14dip"
+        android:layout_marginRight="4dip"
         android:background="@drawable/quiz_button_next"
         android:onClick="next" />
     <Button
