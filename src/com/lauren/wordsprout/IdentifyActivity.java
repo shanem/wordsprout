@@ -35,8 +35,8 @@ import com.lauren.wordsprout.data.QuestionSets;
 
 public class IdentifyActivity extends Activity {
 
-	private int currentQuestionCategory;
-	private int currentQuestionIndex;
+	private static int currentQuestionCategory;
+	private static int currentQuestionIndex;
 	
 	private String[] questions;
 	
@@ -101,7 +101,11 @@ public class IdentifyActivity extends Activity {
     		currentQuestionIndex++;
     	}
     	else {
-    		currentQuestionIndex = 0;
+    		Intent img = new Intent(this, ImageActivity.class);
+        	img.putExtra("cID", currentQuestionCategory);
+
+    		startActivity(img);
+    		//currentQuestionIndex = 0;
     	}
     	questionView.setText(questions[currentQuestionIndex]);
     	trySetPhoto();
@@ -211,7 +215,7 @@ public class IdentifyActivity extends Activity {
     	}
     }
     
-    private String getCurrentImagePath() {
+    public static String getCurrentImagePath() {
     	String path = Environment.getExternalStorageDirectory().toString();
         path += "/WordSprout-image-" + currentQuestionCategory + "_" + currentQuestionIndex + ".jpg";
         return path;
