@@ -2,8 +2,9 @@ package com.lauren.wordsprout;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,14 +14,21 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.view.Window;
 import android.widget.ImageView;
 
 public class ImageActivity extends Activity {
-	ArrayList<ImageView> imageViews;
+
 	private int cId; 
+
+	ArrayList<ImageView> imageViews;
 	ImageView sharedBtn;
 	ImageView restartBtn;
+	TextView monthLabel;
+	TextView dayLabel;
+	TextView yearLabel;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -32,6 +40,9 @@ public class ImageActivity extends Activity {
 		imageViews.add((ImageView) findViewById(R.id.img02));
 		sharedBtn = (ImageView) findViewById(R.id.sharedBtn);
 		restartBtn = (ImageView) findViewById(R.id.restartBtn);
+		monthLabel = (TextView) findViewById(R.id.month_label);
+		dayLabel = (TextView) findViewById(R.id.day_label);
+		yearLabel = (TextView) findViewById(R.id.year_label);
 		sharedBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -49,9 +60,19 @@ public class ImageActivity extends Activity {
         cId = this.getIntent().getExtras().getInt("cID");
         for(int i = 0; i < 2; i++)
         	setupImages(i);
+        setDate();
 	}
 	
-	@SuppressLint("NewApi") private void setupImages(int index) {
+	private String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+	private void setDate() {
+		
+		Calendar calendar = Calendar.getInstance(); 
+		monthLabel.setText(months[calendar.get(Calendar.MONTH)]);
+		dayLabel.setText("" + calendar.get(Calendar.DATE));
+		yearLabel.setText("" + calendar.get(Calendar.YEAR));
+	}
+	
+	private void setupImages(int index) {
 		File imageFile = new File(getCurrentImagePath(index));
 	   	if (imageFile.exists()){
     		BitmapFactory.Options options = new BitmapFactory.Options();

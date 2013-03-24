@@ -43,14 +43,16 @@
         android:orientation="vertical"
         android:layout_marginRight="10dip"
         >
-	    <TextView 
+	    <TextView
+	        android:id="@+id/month_label"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textSize="36dip"
 	        android:textColor="#ffffff"
 	        android:textStyle="bold"
 	        android:text="Jan"/>
-	    <TextView 
+	    <TextView
+	        android:id="@+id/day_label"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textSize="48dip"
@@ -58,7 +60,8 @@
 	        android:textStyle="bold"
 	        android:layout_marginTop="-20dip"
 	        android:text="13"/>
-	    <TextView 
+	    <TextView
+	        android:id="@+id/year_label"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textSize="30dip"
